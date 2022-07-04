@@ -12,16 +12,32 @@ export default function Home() {
     const [option4, setOption4] = useState();
     const [option5, setOption5] = useState();
 
+
     const makeDrawButton = async () => {
         try {
 
             const data = {
                 title,
-                option1,
-                option2,
-                option3,
-                option4,
-                option5
+                "option1":{
+                    text:option1,
+                    count:0
+                },
+                "option2":{
+                    text:option2,
+                    count:0
+                },
+                "option3":{
+                    text:option3,
+                    count:0
+                },
+                "option4":{
+                    text:option4,
+                    count:0
+                },
+                "option5":{
+                    text:option5,
+                    count:0
+                },
             };
 
             await axios.post(

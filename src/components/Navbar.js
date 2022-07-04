@@ -12,6 +12,7 @@ export default function Navbar() {
                 <div className="navbar-nav ms-auto">
                     <Link to="/" className="nav-link fw-bold fs-5 me-3" aria-current="page" href="#">Home</Link>
                     <Link to="/makedraw" className="nav-link fw-bold fs-5" href="#">Make Draw</Link>
+                    <Link to="/vote" className="nav-link fw-bold fs-5" href="#">Vote</Link>
                 </div>
                 </div>
             </div>
