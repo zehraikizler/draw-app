@@ -35,15 +35,20 @@ export default function MakeDraw() {
     }, []);
 
     const sendVote = async () => {
-        let opt = selected[selected.selectedOption]
-        opt.count++
-        let id = selected.id
-        delete selected.selectedOption
-        delete selected.id
-        setSelected({...selected, opt})
-        await axios.put(`https://draw-app-afc54-default-rtdb.europe-west1.firebasedatabase.app/data/${id}.json`, selected, firebaseConfig).then(()=>{
-        history("/vote")
-        })
+        if(!localStorage.getItem(`voted${selected.id}`)){
+            let opt = selected[selected.selectedOption]
+            opt.count++
+            let id = selected.id
+            delete selected.selectedOption
+            delete selected.id
+            setSelected({...selected, opt})
+            await axios.put(`https://draw-app-afc54-default-rtdb.europe-west1.firebasedatabase.app/data/${id}.json`, selected, firebaseConfig).then(()=>{
+            localStorage.setItem(`voted${id}`,true)
+            history("/vote")
+            })
+    }else{
+        alert("Oy kullandın")
+    }
         
     }
 
