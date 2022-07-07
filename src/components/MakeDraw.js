@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { firebaseConfig } from "../firebase-config";
-import { useLocation } from "react-router-dom";
-import { async } from "@firebase/util";
+import { useNavigate } from "react-router-dom";
 
 export default function MakeDraw() {
 
     const [draw, setDraw] = useState([]);
     const [selected, setSelected] = useState();
     const [deletedVote, setDeletedVote] = useState();
-    let history = useLocation()
+    let history = useNavigate()
 
     const setSelectedFunc = (item, id, selectedOption)=>{
          setSelected({...item, id, selectedOption})
@@ -43,14 +42,14 @@ export default function MakeDraw() {
         delete selected.id
         setSelected({...selected, opt})
         await axios.put(`https://draw-app-afc54-default-rtdb.europe-west1.firebasedatabase.app/data/${id}.json`, selected, firebaseConfig).then(()=>{
-        history.push({path:"/vote"})
+        history("/vote")
         })
         
     }
 
     const deleteVote = async (item, id) => {
         setDeletedVote({...item, id});
-        await axios.delete(`https://draw-app-afc54-default-rtdb.europe-west1.firebasedatabase.app/data/${id}.json`, deleteVote, firebaseConfig)
+        await axios.delete(`https://draw-app-afc54-default-rtdb.europe-west1.firebasedatabase.app/data/${id}.json`, deletedVote, firebaseConfig)
     }
 
     return(
